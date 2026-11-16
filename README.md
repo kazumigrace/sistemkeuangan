@@ -1,0 +1,2 @@
+# sistemkeuangan
+mencatat pengeluaran
