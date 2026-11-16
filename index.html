@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Catatan Keuangan Mahasiswa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head><body><main>
+
+<header class="hero">
+  <div><h1>💸 Catatan Keuangan</h1><p>Pantau uang sakumu dengan santai ✨</p></div>
+  <span id="st" class="pill"></span>
+</header>
+
+<section class="card">
+  <h2 id="ft">🌸 Tambah transaksi</h2>
+  <form onsubmit="return add(event)">
+    <label>Jenis<select id="f-type" onchange="cats()"><option value="out">Pengeluaran</option><option value="in">Pemasukan</option></select></label>
+    <label>Tanggal<input type="date" id="f-date" required></label>
+    <label>Kategori<select id="f-cat"></select></label>
+    <label>Jumlah (Rp)<input id="f-amt" inputmode="numeric" placeholder="mis. 15000" required></label>
+    <label class="full">Catatan (opsional)<input id="f-note" placeholder="mis. makan siang di kantin"></label>
+    <div class="full btns">
+      <button class="btn main" type="submit" id="f-ok">Simpan</button>
+      <button class="btn" type="button" id="f-cx" onclick="resetForm()" hidden>Batal</button>
+    </div>
+  </form>
+</section>
+
+<div class="tabs" id="tabs"></div>
+<div class="nav">
+  <button class="btn" onclick="shift(-1)" aria-label="Sebelumnya">‹</button>
+  <b id="lbl"></b>
+  <button class="btn" onclick="shift(1)" aria-label="Berikutnya">›</button>
+  <button class="btn" onclick="anchor=new Date();render()">Hari ini</button>
+</div>
+
+<section class="grid">
+  <div class="stat s-in"><small>🌱 Pemasukan</small><b id="s-in"></b></div>
+  <div class="stat s-out"><small>🍑 Pengeluaran</small><b id="s-out"></b></div>
+  <div class="stat s-bal"><small>🫧 Selisih</small><b id="s-bal"></b></div>
+</section>
+
+<section class="card">
+  <h2>🎯 Anggaran bulanan</h2>
+  <input id="bud" inputmode="numeric" placeholder="Batas pengeluaran per bulan (Rp)" oninput="setBudget()">
+  <div id="bud-info" class="mut"></div>
+</section>
+
+<section class="card" id="chart-card">
+  <h2>📊 Pengeluaran per hari</h2>
+  <div class="chart" id="chart"></div>
+  <div class="chart-l"><span id="c1"></span><span id="c2"></span></div>
+</section>
+
+<section class="card"><h2>🍰 Per kategori</h2><div id="cat"></div></section>
+<section class="card"><h2>🧾 Daftar transaksi</h2><div id="list"></div></section>
+
+<details class="card">
+  <summary>💾 Cadangkan / pulihkan data</summary>
+  <p class="mut">Data tersimpan di browser perangkat ini. Salin teks cadangan ke catatanmu, atau tempel lalu pulihkan.</p>
+  <textarea id="bk" rows="4"></textarea>
+  <div class="btns"><button class="btn" onclick="backup()">Buat cadangan</button><button class="btn" onclick="restore()">Pulihkan</button></div>
+  <p class="mut" id="bk-msg"></p>
+</details>
+
+</main>
+<script src="script.js"></script>
+</body></html>
